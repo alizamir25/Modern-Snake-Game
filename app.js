@@ -1,13 +1,10 @@
-
 let dom_replay = document.querySelector("#replay");
 let dom_score = document.querySelector("#score");
 let dom_canvas = document.createElement("canvas");
 document.querySelector("#canvas").appendChild(dom_canvas);
 let CTX = dom_canvas.getContext("2d");
-
 const W = (dom_canvas.width = 400);
 const H = (dom_canvas.height = 400);
-
 let snake,
   food,
   currentHue,
@@ -21,7 +18,6 @@ let snake,
   splashingParticleCount = 20,
   cellsCount,
   requestID;
-
 let helpers = {
   Vec: class {
     constructor(x, y) {
@@ -113,12 +109,10 @@ let helpers = {
       green = 0;
       blue = secondComponent;
     }
-
     var lightnessAdjustment = lightness - chroma / 2;
     red += lightnessAdjustment;
     green += lightnessAdjustment;
     blue += lightnessAdjustment;
-
     return [
       Math.round(red * 255),
       Math.round(green * 255),
@@ -129,7 +123,6 @@ let helpers = {
     return start * (1 - t) + end * t;
   }
 };
-
 let KEY = {
   ArrowUp: false,
   ArrowRight: false,
@@ -160,7 +153,6 @@ let KEY = {
     );
   }
 };
-
 class Snake {
   constructor(i, type) {
     this.pos = new helpers.Vec(W / 2, H / 2);
@@ -248,7 +240,6 @@ class Snake {
     }
   }
 }
-
 class Food {
   constructor() {
     this.pos = new helpers.Vec(
@@ -280,7 +271,6 @@ class Food {
     this.pos = new helpers.Vec(randX, randY);
   }
 }
-
 class Particle {
   constructor(pos, color, size, vel) {
     this.pos = pos;
@@ -314,12 +304,10 @@ class Particle {
     this.vel.y -= this.gravity;
   }
 }
-
 function incrementScore() {
   score++;
   dom_score.innerText = score.toString().padStart(2, "0");
 }
-
 function particleSplash() {
   for (let i = 0; i < splashingParticleCount; i++) {
     let vel = new helpers.Vec(Math.random() * 6 - 3, Math.random() * 6 - 3);
@@ -327,11 +315,9 @@ function particleSplash() {
     particles.push(new Particle(position, currentHue, food.size, vel));
   }
 }
-
 function clear() {
   CTX.clearRect(0, 0, W, H);
 }
-
 function initialize() {
   CTX.imageSmoothingEnabled = false;
   KEY.listen();
@@ -342,7 +328,6 @@ function initialize() {
   dom_replay.addEventListener("click", reset, false);
   loop();
 }
-
 function loop() {
   clear();
   if (!isGameOver) {
@@ -359,7 +344,6 @@ function loop() {
     gameOver();
   }
 }
-
 function gameOver() {
   maxScore ? null : (maxScore = score);
   score > maxScore ? (maxScore = score) : null;
@@ -372,7 +356,6 @@ function gameOver() {
   CTX.fillText(`SCORE   ${score}`, W / 2, H / 2 + 60);
   CTX.fillText(`MAXSCORE   ${maxScore}`, W / 2, H / 2 + 80);
 }
-
 function reset() {
   dom_score.innerText = "00";
   score = "00";
@@ -383,5 +366,4 @@ function reset() {
   clearTimeout(requestID);
   loop();
 }
-
 initialize();
