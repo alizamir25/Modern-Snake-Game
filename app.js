@@ -179,34 +179,34 @@ class Snake{
       }
     }
   }
-  walls() {
-    let { x, y } = this.pos;
-    if (x + cellSize > W) {
-      this.pos.x = 0;
+  walls(){
+    let { x, y }=this.pos;
+    if (x + cellSize>W){
+      this.pos.x=0;
     }
-    if (y + cellSize > W) {
-      this.pos.y = 0;
+    if (y+cellSize>W){
+      this.pos.y=0;
     }
-    if (y < 0) {
-      this.pos.y = H - cellSize;
+    if (y<0){
+      this.pos.y=H-cellSize;
     }
-    if (x < 0) {
-      this.pos.x = W - cellSize;
+    if (x<0){
+      this.pos.x=W-cellSize;
     }
   }
-  controlls() {
-    let dir = this.size;
-    if (KEY.ArrowUp) {
-      this.dir = new helpers.Vec(0, -dir);
+  controlls(){
+    let dir=this.size;
+    if (KEY.ArrowUp){
+      this.dir=new helpers.Vec(0, -dir);
     }
-    if (KEY.ArrowDown) {
-      this.dir = new helpers.Vec(0, dir);
+    if (KEY.ArrowDown){
+      this.dir=new helpers.Vec(0, dir);
     }
-    if (KEY.ArrowLeft) {
-      this.dir = new helpers.Vec(-dir, 0);
+    if (KEY.ArrowLeft){
+      this.dir=new helpers.Vec(-dir, 0);
     }
-    if (KEY.ArrowRight) {
-      this.dir = new helpers.Vec(dir, 0);
+    if (KEY.ArrowRight){
+      this.dir=new helpers.Vec(dir, 0);
     }
   }
   selfCollision() {
