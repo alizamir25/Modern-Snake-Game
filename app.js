@@ -228,13 +228,13 @@ class Snake{
         food.spawn();
         this.total++;
       }
-      this.history[this.total - 1] = new helpers.Vec(this.pos.x, this.pos.y);
-      for (let i = 0; i < this.total - 1; i++) {
-        this.history[i] = this.history[i + 1];
+      this.history[this.total-1]=new helpers.Vec(this.pos.x, this.pos.y);
+      for (let i=0;i<this.total-1; i++) {
+        this.history[i]=this.history[i+1];
       }
       this.pos.add(this.dir);
-      this.delay = 5;
-      this.total > 3 ? this.selfCollision() : null;
+      this.delay=5;
+      this.total>3?this.selfCollision():null;
     }
   }
 }
