@@ -1,42 +1,42 @@
-let dom_replay = document.querySelector("#replay");
-let dom_score = document.querySelector("#score");
-let dom_canvas = document.createElement("canvas");
+let dom_replay=document.querySelector("#replay");
+let dom_score=document.querySelector("#score");
+let dom_canvas=document.createElement("canvas");
 document.querySelector("#canvas").appendChild(dom_canvas);
-let CTX = dom_canvas.getContext("2d");
-const W = (dom_canvas.width = 400);
-const H = (dom_canvas.height = 400);
+let CTX=dom_canvas.getContext("2d");
+const W=(dom_canvas.width = 400);
+const H=(dom_canvas.height = 400);
 let snake,
   food,
   currentHue,
-  cells = 20,
+  cells=20,
   cellSize,
   isGameOver = false,
-  tails = [],
-  score = 000,
-  maxScore = window.localStorage.getItem("maxScore") || undefined,
-  particles = [],
+  tails=[],
+  score=000,
+  maxScore=window.localStorage.getItem("maxScore") || undefined,
+  particles=[],
   splashingParticleCount = 20,
   cellsCount,
   requestID;
-let helpers = {
-  Vec: class {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
+let helpers={
+  Vec: class{
+    constructor(x, y){
+      this.x=x;
+      this.y=y;
     }
-    add(v) {
-      this.x += v.x;
-      this.y += v.y;
+    add(v){
+      this.x+=v.x;
+      this.y+=v.y;
       return this;
     }
-    mult(v) {
-      if (v instanceof helpers.Vec) {
-        this.x *= v.x;
-        this.y *= v.y;
+    mult(v){
+      if (v instanceof helpers.Vec){
+        this.x*=v.x;
+        this.y*=v.y;
         return this;
-      } else {
-        this.x *= v;
-        this.y *= v;
+      } else{
+        this.x*=v;
+        this.y*=v;
         return this;
       }
     }
