@@ -41,22 +41,22 @@ let helpers={
       }
     }
   },
-  isCollision(v1, v2) {
-    return v1.x == v2.x && v1.y == v2.y;
+  isCollision(v1, v2){
+    return v1.x==v2.x && v1.y==v2.y;
   },
-  garbageCollector() {
-    for (let i = 0; i < particles.length; i++) {
-      if (particles[i].size <= 0) {
-        particles.splice(i, 1);
+  garbageCollector(){
+    for (let i=0;i<particles.length;i++){
+      if (particles[i].size<=0){
+        particles.splice(i,1);
       }
     }
   },
-  drawGrid() {
-    CTX.lineWidth = 1.1;
-    CTX.strokeStyle = "#232332";
-    CTX.shadowBlur = 0;
-    for (let i = 1; i < cells; i++) {
-      let f = (W / cells) * i;
+  drawGrid(){
+    CTX.lineWidth=1.1;
+    CTX.strokeStyle="#232332";
+    CTX.shadowBlur=0;
+    for (let i=1;i<cells;i++){
+      let f=(W/cells)*i;
       CTX.beginPath();
       CTX.moveTo(f, 0);
       CTX.lineTo(f, H);
