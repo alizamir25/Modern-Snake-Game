@@ -107,21 +107,21 @@ let helpers={
       green=0;
       blue=secondComponent;
     }
-    var lightnessAdjustment = lightness - chroma / 2;
-    red += lightnessAdjustment;
-    green += lightnessAdjustment;
-    blue += lightnessAdjustment;
-    return [
-      Math.round(red * 255),
-      Math.round(green * 255),
-      Math.round(blue * 255)
+    var lightnessAdjustment=lightness-chroma/2;
+    red+=lightnessAdjustment;
+    green+=lightnessAdjustment;
+    blue+=lightnessAdjustment;
+    return[
+      Math.round(red*255),
+      Math.round(green*255),
+      Math.round(blue*255)
     ];
   },
-  lerp(start, end, t) {
-    return start * (1 - t) + end * t;
+  lerp(start, end, t){
+    return start*(1 - t)+end*t;
   }
 };
-let KEY = {
+let KEY={
   ArrowUp: false,
   ArrowRight: false,
   ArrowDown: false,
