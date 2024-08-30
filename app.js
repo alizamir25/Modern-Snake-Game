@@ -151,30 +151,30 @@ let KEY={
     );
   }
 };
-class Snake {
-  constructor(i, type) {
-    this.pos = new helpers.Vec(W / 2, H / 2);
-    this.dir = new helpers.Vec(0, 0);
-    this.type = type;
-    this.index = i;
-    this.delay = 5;
-    this.size = W / cells;
-    this.color = "white";
-    this.history = [];
-    this.total = 1;
+class Snake{
+  constructor(i, type){
+    this.pos=new helpers.Vec(W/2,H/2);
+    this.dir=new helpers.Vec(0, 0);
+    this.type=type;
+    this.index=i;
+    this.delay=5;
+    this.size=W/cells;
+    this.color="white";
+    this.history=[];
+    this.total=1;
   }
-  draw() {
-    let { x, y } = this.pos;
-    CTX.fillStyle = this.color;
-    CTX.shadowBlur = 20;
-    CTX.shadowColor = "rgba(255,255,255,.3 )";
+  draw(){
+    let { x, y }=this.pos;
+    CTX.fillStyle=this.color;
+    CTX.shadowBlur=20;
+    CTX.shadowColor="rgba(255,255,255,.3 )";
     CTX.fillRect(x, y, this.size, this.size);
     CTX.shadowBlur = 0;
-    if (this.total >= 2) {
-      for (let i = 0; i < this.history.length - 1; i++) {
-        let { x, y } = this.history[i];
-        CTX.lineWidth = 1;
-        CTX.fillStyle = "rgba(225,225,225,1)";
+    if (this.total>=2){
+      for (let i=0;i<this.history.length-1;i++){
+        let { x, y }=this.history[i];
+        CTX.lineWidth=1;
+        CTX.fillStyle="rgba(225,225,225,1)";
         CTX.fillRect(x, y, this.size, this.size);
       }
     }
