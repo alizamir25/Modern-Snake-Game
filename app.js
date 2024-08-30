@@ -257,83 +257,83 @@ class Food{
     CTX.globalCompositeOperation="source-over";
     CTX.shadowBlur=0;
   }
-  spawn() {
-    let randX = ~~(Math.random() * cells) * this.size;
-    let randY = ~~(Math.random() * cells) * this.size;
-    for (let path of snake.history) {
-      if (helpers.isCollision(new helpers.Vec(randX, randY), path)) {
+  spawn(){
+    let randX =~~(Math.random()*cells)*this.size;
+    let randY =~~(Math.random()*cells)* his.size;
+    for (let path of snake.history){
+      if (helpers.isCollision(new helpers.Vec(randX, randY), path)){
         return this.spawn();
       }
     }
-    this.color = currentHue = `hsl(${helpers.randHue()}, 100%, 50%)`;
-    this.pos = new helpers.Vec(randX, randY);
+    this.color=currentHue=`hsl(${helpers.randHue()}, 100%, 50%)`;
+    this.pos=new helpers.Vec(randX, randY);
   }
 }
-class Particle {
-  constructor(pos, color, size, vel) {
-    this.pos = pos;
-    this.color = color;
-    this.size = Math.abs(size / 2);
-    this.ttl = 0;
-    this.gravity = -0.2;
-    this.vel = vel;
+class Particle{
+  constructor(pos, color, size, vel){
+    this.pos=pos;
+    this.color=color;
+    this.size=Math.abs(size / 2);
+    this.ttl=0;
+    this.gravity=-0.2;
+    this.vel=vel;
   }
-  draw() {
-    let { x, y } = this.pos;
-    let hsl = this.color
+  draw(){
+    let { x, y }=this.pos;
+    let hsl=this.color
       .split("")
-      .filter((l) => l.match(/[^hsl()$% ]/g))
+      .filter((l)=>l.match(/[^hsl()$% ]/g))
       .join("")
       .split(",")
-      .map((n) => +n);
-    let [r, g, b] = helpers.hsl2rgb(hsl[0], hsl[1] / 100, hsl[2] / 100);
-    CTX.shadowColor = `rgb(${r},${g},${b},${1})`;
-    CTX.shadowBlur = 0;
-    CTX.globalCompositeOperation = "lighter";
-    CTX.fillStyle = `rgb(${r},${g},${b},${1})`;
+      .map((n)=>+n);
+    let [r, g, b]=helpers.hsl2rgb(hsl[0], hsl[1]/100, hsl[2]/100);
+    CTX.shadowColor=`rgb(${r},${g},${b},${1})`;
+    CTX.shadowBlur=0;
+    CTX.globalCompositeOperation="lighter";
+    CTX.fillStyle=`rgb(${r},${g},${b},${1})`;
     CTX.fillRect(x, y, this.size, this.size);
-    CTX.globalCompositeOperation = "source-over";
+    CTX.globalCompositeOperation="source-over";
   }
-  update() {
+  update(){
     this.draw();
-    this.size -= 0.3;
-    this.ttl += 1;
+    this.size-=0.3;
+    this.ttl+=1;
     this.pos.add(this.vel);
-    this.vel.y -= this.gravity;
+    this.vel.y- this.gravity;
   }
 }
-function incrementScore() {
+function incrementScore(){
   score++;
-  dom_score.innerText = score.toString().padStart(2, "0");
+  dom_score.innerText=score.toString().padStart(2, "0");
 }
-function particleSplash() {
-  for (let i = 0; i < splashingParticleCount; i++) {
-    let vel = new helpers.Vec(Math.random() * 6 - 3, Math.random() * 6 - 3);
-    let position = new helpers.Vec(food.pos.x, food.pos.y);
+function particleSplash(){
+  for (let i=0;i<splashingParticleCount;i++){
+    let vel=new helpers.Vec(Math.random()*6-3, Math.random()*6- );
+    let position=new helpers.Vec(food.pos.x, food.pos.y);
     particles.push(new Particle(position, currentHue, food.size, vel));
   }
 }
-function clear() {
+function clear(){
   CTX.clearRect(0, 0, W, H);
 }
-function initialize() {
-  CTX.imageSmoothingEnabled = false;
+function initialize(){
+  CTX.imageSmoothingEnabled=false;
   KEY.listen();
-  cellsCount = cells * cells;
-  cellSize = W / cells;
-  snake = new Snake();
-  food = new Food();
+  cellsCount=cells*cells;
+  cellSize=W/cells;
+  snake=new Snake();
+  food=new Food();
   dom_replay.addEventListener("click", reset, false);
   loop();
 }
-function loop() {
+function loop(){
   clear();
-  if (!isGameOver) {
-    requestID = setTimeout(loop, 1000 / 60);
+  if (!isGameOver){
+    requestID = setTimeout(loop, 1000/60);
     helpers.drawGrid();
     snake.update();
     food.draw();
-    for (let p of particles) {
+    for (let p of particles){
       p.update();
     }
     helpers.garbageCollector();
@@ -342,25 +342,25 @@ function loop() {
     gameOver();
   }
 }
-function gameOver() {
-  maxScore ? null : (maxScore = score);
-  score > maxScore ? (maxScore = score) : null;
+function gameOver(){
+  maxScore ? null : (maxScore=score);
+  score > maxScore ? (maxScore=score) : null;
   window.localStorage.setItem("maxScore", maxScore);
-  CTX.fillStyle = "#4cffd7";
-  CTX.textAlign = "center";
-  CTX.font = "bold 30px Poppins, sans-serif";
-  CTX.fillText("GAME OVER", W / 2, H / 2);
-  CTX.font = "15px Poppins, sans-serif";
-  CTX.fillText(`SCORE   ${score}`, W / 2, H / 2 + 60);
-  CTX.fillText(`MAXSCORE   ${maxScore}`, W / 2, H / 2 + 80);
+  CTX.fillStyle="#4cffd7";
+  CTX.textAlign="center";
+  CTX.font="bold 30px Poppins, sans-serif";
+  CTX.fillText("GAME OVER", W/2, H/2);
+  CTX.font="15px Poppins, sans-serif";
+  CTX.fillText(`SCORE   ${score}`, W/2, H/2+60);
+  CTX.fillText(`MAXSCORE   ${maxScore}`, W/2, H/2+80);
 }
-function reset() {
-  dom_score.innerText = "00";
-  score = "00";
-  snake = new Snake();
+function reset(){
+  dom_score.innerText="000";
+  score="000";
+  snake=new Snake();
   food.spawn();
   KEY.resetState();
-  isGameOver = false;
+  isGameOver=false;
   clearTimeout(requestID);
   loop();
 }
