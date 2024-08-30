@@ -68,16 +68,16 @@ let helpers={
       CTX.closePath();
     }
   },
-  randHue() {
-    return ~~(Math.random() * 360);
+  randHue(){
+    return~~(Math.random()*360);
   },
-  hsl2rgb(hue, saturation, lightness) {
-    if (hue == undefined) {
-      return [0, 0, 0];
+  hsl2rgb(hue, saturation, lightness){
+    if (hue==undefined){
+      return[0, 0, 0];
     }
-    var chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
-    var huePrime = hue / 60;
-    var secondComponent = chroma * (1 - Math.abs((huePrime % 2) - 1));
+    var chroma=(1-Math.abs(2*lightness-1))*saturation;
+    var huePrime=hue/60;
+    var secondComponent=chroma*(1-Math.abs((huePrime%2)-1));
 
     huePrime = ~~huePrime;
     var red;
