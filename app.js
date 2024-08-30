@@ -209,20 +209,20 @@ class Snake{
       this.dir=new helpers.Vec(dir, 0);
     }
   }
-  selfCollision() {
-    for (let i = 0; i < this.history.length; i++) {
-      let p = this.history[i];
-      if (helpers.isCollision(this.pos, p)) {
-        isGameOver = true;
+  selfCollision(){
+    for (let i=0;i<this.history.length;i++){
+      let p=this.history[i];
+      if (helpers.isCollision(this.pos, p)){
+        isGameOver=true;
       }
     }
   }
-  update() {
+  update(){
     this.walls();
     this.draw();
     this.controlls();
-    if (!this.delay--) {
-      if (helpers.isCollision(this.pos, food.pos)) {
+    if (!this.delay--){
+      if (helpers.isCollision(this.pos, food.pos)){
         incrementScore();
         particleSplash();
         food.spawn();
